@@ -1,0 +1,71 @@
+research_task:
+  description: |
+    Research {topic} for an audience of {audience}.
+
+    Instructions:
+    - Run 2-4 different web_search queries
+    - Use read_webpage on the 2-3 most relevant URLs
+    - Collect key facts, statistics, trends, examples and quotes
+  expected_output: >
+    Structured bullet-point research notes grouped by sub-theme.
+    Every bullet must end with its source URL.
+  agent: researcher
+
+writing_task:
+  description: |
+    Using the research notes below, write a full blog post about {topic}.
+
+    Requirements:
+    - Write in a {tone} tone for {audience}
+    - Include a compelling title, an introduction hook and a conclusion
+      with a call to action
+    - Use 3-5 main sections, each 2-3 paragraphs
+    - Use ONLY facts from the research notes
+    - Target around {word_count} words
+    - End with a Sources list
+
+    === RESEARCH NOTES ===
+    {research_notes}
+  expected_output: >
+    A complete blog post in markdown format, ready for editing.
+    Clear transitions between sections.
+  agent: writer
+
+editing_task:
+  description: |
+    Review and edit the blog post about {topic}.
+
+    Focus on:
+    - Fixing any grammar or spelling errors
+    - Improving sentence clarity and flow
+    - Ensuring consistent tone throughout
+    - Strengthening the introduction and conclusion
+    - Removing any redundancy
+
+    Do not rewrite the post, refine and polish it.
+
+    === DRAFT ===
+    {draft}
+  expected_output: >
+    The polished blog post in markdown format without '```'.
+    Clean formatting and professional prose.
+  agent: editor
+
+formatting_task:
+  description: |
+    Format the edited post as a final markdown document.
+
+    Requirements:
+    - Start with YAML front matter between '---' lines containing:
+      title, description (one sentence), tags (comma-separated), date (today)
+    - After the front matter, use ONE '# Title' H1, then '##' for sections
+    - Use consistent bullet and numbered list syntax
+    - End with a '## Sources' section as a bulleted list of markdown links
+    - Output ONLY the document, with no commentary
+
+    === EDITED POST ===
+    {edited_post}
+  expected_output: >
+    The final markdown document with YAML front matter, without '```'.
+  agent: formatter
+  output_file: output/post.md
